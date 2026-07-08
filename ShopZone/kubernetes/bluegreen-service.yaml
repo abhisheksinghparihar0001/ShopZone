@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+
+
+metadata:
+
+  name: shopzone-bluegreen
+
+  namespace: shopzone
+
+
+
+spec:
+
+
+  selector:
+
+
+    app: shopzone
+
+
+    version: blue
+
+
+
+  ports:
+
+
+  - port: 80
+
+    targetPort: 80

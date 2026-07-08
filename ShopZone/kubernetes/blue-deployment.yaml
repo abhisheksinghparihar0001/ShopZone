@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+
+  name: shopzone-blue
+
+  namespace: shopzone
+
+
+spec:
+
+
+  replicas: 3
+
+
+  selector:
+
+    matchLabels:
+
+      app: shopzone
+
+      version: blue
+
+
+
+  template:
+
+
+    metadata:
+
+      labels:
+
+        app: shopzone
+
+        version: blue
+
+
+
+    spec:
+
+
+      containers:
+
+
+      - name: shopzone
+
+
+        image: shopzone:v1
+
+
+        ports:
+
+
+        - containerPort: 80

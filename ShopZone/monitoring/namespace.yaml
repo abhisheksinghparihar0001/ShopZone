@@ -1,0 +1,22 @@
+apiVersion: v1
+
+kind: Namespace
+
+
+metadata:
+
+  name: monitoring
+
+
+  labels:
+
+    app: monitoring
+
+    project: ShopZone
+
+    environment: production
+
+
+  annotations:
+
+    description: "Namespace for Prometheus and Grafana monitoring tools"

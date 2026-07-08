@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+
+metadata:
+
+  name: shopzone
+
+
+  labels:
+
+    app: shopzone
+
+    environment: production
+
+    project: ecommerce
+
+    managed-by: kubernetes
+
+
+
+  annotations:
+
+    description: "ShopZone E-commerce Application Namespace"
+
+    owner: "DevOps Team"
+
+    version: "v1.0"

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+
+
+metadata:
+
+  name: shopzone-green
+
+  namespace: shopzone
+
+
+
+spec:
+
+
+  replicas: 3
+
+
+
+  selector:
+
+
+    matchLabels:
+
+
+      app: shopzone
+
+
+      version: green
+
+
+
+  template:
+
+
+    metadata:
+
+
+      labels:
+
+
+        app: shopzone
+
+
+        version: green
+
+
+
+    spec:
+
+
+      containers:
+
+
+      - name: shopzone
+
+
+        image: shopzone:v2
+
+
+        ports:
+
+
+        - containerPort: 80

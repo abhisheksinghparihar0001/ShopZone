@@ -1,0 +1,235 @@
+pipeline {
+
+    agent any
+
+
+    environment {
+
+        APP_NAME = "shopzone"
+
+        IMAGE_NAME = "shopzone"
+
+        IMAGE_TAG = "v${BUILD_NUMBER}"
+
+        NAMESPACE = "shopzone"
+
+    }
+
+
+
+    stages {
+
+
+        stage('Validate Application') {
+
+            steps {
+
+                sh '''
+                echo "Checking files..."
+
+                test -f frontend/index.html
+
+                test -f css/style.css
+
+                test -f js/script.js
+
+                echo "Validation successful"
+
+                '''
+
+            }
+
+        }
+
+
+
+
+
+        stage('Build Application') {
+
+            steps {
+
+                sh '''
+
+                echo "Building ShopZone Application"
+
+                ls -la
+
+                '''
+
+            }
+
+        }
+
+
+
+
+
+        stage('Docker Build') {
+
+            steps {
+
+                sh '''
+
+                docker build \
+                -t ${IMAGE_NAME}:${IMAGE_TAG} \
+                -f docker/Dockerfile .
+
+                '''
+
+            }
+
+        }
+
+
+
+
+
+        stage('Docker Container Test') {
+
+            steps {
+
+                sh '''
+
+                docker run -d \
+                --name shopzone-test \
+                -p 8081:80 \
+                ${IMAGE_NAME}:${IMAGE_TAG}
+
+
+                sleep 10
+
+
+                curl http://localhost:8081
+
+
+                docker stop shopzone-test
+
+                docker rm shopzone-test
+
+                '''
+
+            }
+
+        }
+
+
+
+
+
+        stage('Security Scan') {
+
+            steps {
+
+                sh '''
+
+                echo "Running Security Scan"
+
+                trivy image ${IMAGE_NAME}:${IMAGE_TAG}
+
+                '''
+
+            }
+
+        }
+
+
+
+
+
+        stage('Manual Approval') {
+
+            steps {
+
+                input message:
+                'Deploy ShopZone to Kubernetes?'
+
+            }
+
+        }
+
+
+
+
+
+        stage('Deploy To Kubernetes') {
+
+            steps {
+
+                sh '''
+
+                kubectl apply \
+                -f kubernetes/ \
+                -n ${NAMESPACE}
+
+
+                kubectl set image deployment/shopzone \
+                shopzone=${IMAGE_NAME}:${IMAGE_TAG} \
+                -n ${NAMESPACE}
+
+                '''
+
+            }
+
+        }
+
+
+
+
+
+        stage('Verify Deployment') {
+
+            steps {
+
+                sh '''
+
+                kubectl get pods \
+                -n ${NAMESPACE}
+
+
+                kubectl rollout status \
+                deployment/shopzone \
+                -n ${NAMESPACE}
+
+                '''
+
+            }
+
+        }
+
+
+
+    }
+
+
+
+    post {
+
+
+        success {
+
+            echo "ShopZone Deployment Successful"
+
+        }
+
+
+
+        failure {
+
+            echo "Deployment Failed - Rollback Started"
+
+
+            sh '''
+
+            kubectl rollout undo deployment/shopzone \
+            -n ${NAMESPACE}
+
+            '''
+
+        }
+
+
+    }
+
+
+}
