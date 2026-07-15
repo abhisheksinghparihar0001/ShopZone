@@ -299,48 +299,6 @@ minikube version
 ```bash
 helm version
 ```
-
----
-
-# 🔄 CI/CD Pipeline Workflow
-
-```
-Developer
-    |
-    |
-Code Commit
-    |
-    |
-Jenkins Pipeline
-    |
-    |
-Application Validation
-    |
-    |
-Docker Image Build
-    |
-    |
-Container Testing
-    |
-    |
-Security Scan
-    |
-    |
-Deploy Green Version
-    |
-    |
-Health Verification
-    |
-    |
-Manual Approval
-    |
-    |
-Traffic Switch
-    |
-    |
-Production Deployment
-```
-
 ---
 
 # 📊 Monitoring Workflow
