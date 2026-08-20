@@ -354,17 +354,6 @@ Implemented:
 ✅ Production Style Architecture
 
 ---
-
-# 🔮 Future Enhancements
-
-* HTTPS with SSL certificates
-* Private Docker Registry
-* GitOps using ArgoCD
-* Canary Deployment
-* Centralized Logging using ELK/Loki
-* Kubernetes RBAC
-* Network Policies
-
 ---
 
 # 👨‍💻 Project
