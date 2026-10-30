@@ -28,6 +28,7 @@ This project implements a complete software delivery lifecycle:
 The complete infrastructure is hosted on **local On-Prem Ubuntu servers without using any public cloud platform.**
 
 ---
+---
 
 # 🏗️ Infrastructure Architecture
 
