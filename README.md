@@ -77,6 +77,7 @@ Grafana Dashboard
 ```
 
 ---
+---
 
 # 🛠️ Technology Stack
 
