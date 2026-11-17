@@ -32,6 +32,7 @@ The complete infrastructure is hosted on **local On-Prem Ubuntu servers without 
 ---
 ---
 ---
+---
 
 # 🏗️ Infrastructure Architecture
 
