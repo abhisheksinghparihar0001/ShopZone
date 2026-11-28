@@ -319,6 +319,7 @@ minikube version
 helm version
 ```
 ---
+---
 
 # 📊 Monitoring Workflow
 
